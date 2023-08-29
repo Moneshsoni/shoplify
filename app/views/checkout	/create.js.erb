@@ -1,0 +1,9 @@
+<%binding.pry%>
+alert('Hello from my_action.js.erb!');
+var stripe = Stripe("<%= Rails.application.credentials[:stripe][:public] %>");
+
+stripe.redirectToCheckout({
+  sessionId: '<%= @session.id %>'
+}).then(function (result) {
+  console.log(result.error.message);
+});
