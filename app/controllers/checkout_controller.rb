@@ -1,8 +1,9 @@
 class CheckoutController < ApplicationController
-	
-	def create
-		product = Product.find(params[:id])
 
+	def create
+	
+		product = Product.find(params[:id])
+		product.update(sales_count: product.sales_count+1)
 		@session = Stripe::Checkout::Session.create({
 		  payment_method_types: ['card'],
 		  line_items: [ {
